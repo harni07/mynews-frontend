@@ -1,0 +1,100 @@
+.top-banner {
+  width: 100%;
+  background-color: #bb1e1e;
+  color: #fff;
+  padding: 10px 0;
+
+  .top-banner-content {
+    max-width: 1095px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .banner-text {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+
+      strong {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .banner-actions {
+      display: flex;
+      gap: 10px;
+
+      .dismiss-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 5px;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .get-btn {
+        background-color: #fff;
+        color: #000;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .top-banner-content {
+      margin-top: 60px;
+      width: 90%;
+      flex-direction: column; // Prelazak na vertikalni layout na manjim uređajima
+      gap: 10px;
+
+      .banner-text {
+        flex-direction: column;
+        text-align: center; // Centriran tekst
+        gap: 5px;
+
+        strong {
+          font-size: 14px;
+        }
+
+        span {
+          font-size: 12px;
+        }
+      }
+
+      .banner-actions {
+        justify-content: center; // Centriranje gumba
+        flex-direction: row;
+        gap: 10px;
+
+        .dismiss-btn,
+        .get-btn {
+          font-size: 12px;
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+}

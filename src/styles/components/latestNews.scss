@@ -1,0 +1,131 @@
+
+.latest-news {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  padding-right: 0;
+  height: 100%;
+
+  .news-list {
+    flex-grow: 1; 
+    max-height: 480px; 
+    overflow-y: auto; 
+    padding-right: 10px; 
+
+    &::-webkit-scrollbar {
+      width: 6px; 
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #bbb; 
+      border-radius: 10px; 
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #888;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent; 
+    }
+
+    .news-item {
+      transition: background-color 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+
+      .news-time {
+        font-size: 10px;
+        line-height: 16px;
+        color: #1e71bb;
+        margin-bottom: 4px;
+      }
+
+      .news-title {
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 8px;
+        font-weight: 400;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 0;
+      }
+    }
+  }
+
+  .see-all {
+    text-align: center;
+    margin-top: 16px;
+
+    span {
+      font-size: 12px;
+      line-height: 14px;
+      color: #007bff;
+      cursor: pointer;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      text-decoration: none;
+
+      .arrow {
+        margin-left: 5px;
+        font-size: 20px;
+        color: #000;
+      }
+    }
+  }
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .inner-circle {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    background-color: #bb1e1e;
+    border-radius: 50%;
+    animation: blink 1s infinite; 
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(187, 30, 30, 0.24); 
+      border-radius: 50%;
+    }
+  }
+
+  .live-text {
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 15px;
+    color: #000;
+    font-weight: bold;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}

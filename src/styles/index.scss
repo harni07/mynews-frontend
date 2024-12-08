@@ -1,0 +1,45 @@
+@import './bootstrap/imports';
+@import './utils';
+@import './components/layout';
+@import './components/sidebar';
+@import './components/grid';
+@import './components/card';
+@import './components/breakingCard';
+@import './components/latestNews';
+@import './components/topBanner';
+@import './components/bookmark';
+@import './components/authHeader';
+@import './components/searchBar';
+@import './components/loader';
+
+@import './components/button';
+@import './components/pagination';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500&display=swap');
+
+
+$yellow-main: #BB1E1E;
+
+
+html * {
+  font-family: 'Roboto', sans-serif;
+}
+
+.btn-primary {
+  background-color: $yellow-main !important;
+  border: none !important;
+}
+
+body, html, #root {
+  background-color: #F4F5F8;
+  height: 100%;
+  font-size: 18px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-toggler{
+  border: none;
+}

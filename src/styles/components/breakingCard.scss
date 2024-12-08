@@ -1,0 +1,36 @@
+.breaking-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1d1d1b;
+  color: #fff;
+  padding: 20px;
+  height: 100%;
+  border-radius: 8px;
+
+  .breaking-label {
+    font-size: 10px;
+    line-height: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #bb1e1e; 
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+
+  .breaking-title {
+    font-size: 25px;
+    line-height: 29px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .breaking-author {
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #777;
+  }
+}

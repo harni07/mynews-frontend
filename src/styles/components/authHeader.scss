@@ -1,0 +1,50 @@
+.auth-header {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+  
+    .auth-button {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+  
+      &.login {
+        background-color: transparent;
+        color: #ff6347;
+        border: 1px solid #ff6347;
+  
+        &:hover {
+          background-color: #ff6347;
+          color: #fff;
+        }
+      }
+  
+      &.signup {
+        background-color: #ff6347;
+        color: #fff;
+  
+        &:hover {
+          background-color: #e55347;
+          box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+        }
+      }
+  
+      &.logout {
+        background-color: transparent;
+        color: #e55347;
+        border: 1px solid #e55347;
+  
+        &:hover {
+          background-color: #ff6347;
+          border-color: #ff6347;
+          color: #fff;
+        }
+      }
+    }
+  }
+  

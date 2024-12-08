@@ -1,0 +1,116 @@
+.table-image {
+    height: 50px;
+    width: 50px;
+}
+
+.logo {
+    color: red;
+
+    span {
+        color: black;
+    }
+}
+
+.toast {
+    z-index: 999999999 !important;
+    position: fixed !important;
+    top: 0;
+}
+
+.custom-container {
+    max-width: 90%;
+}
+
+.navbar-brand {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dropdown-menu.show {
+    left: -40px;
+}
+
+.username-color {
+    color: #dddddd;
+}
+
+.import-trades {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.form-container button {
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    align-self: center;
+    width: 50%;
+}
+
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.pagination-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pagination-button:hover {
+    background-color: #f7f7f7;
+}
+
+.pagination-button:disabled {
+    color: #999;
+    cursor: not-allowed;
+}
+
+.pagination-active {
+    background-color: #b6cbcb;
+    color: white;
+}
+
+.current-image img {
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 10px;
+}
+
+.chart-title {
+    margin-bottom: 2rem;
+}
+
+.container-style {
+    background-color: #272c38;
+    color: white;
+    padding: 20px;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+}
+
+.main-background {
+    background: #181d29;
+}
+
+.react-datetime-picker__wrapper {
+    padding: 6px;
+    border: 1px solid #DEE2E8;
+    border-radius: 4px;
+}

@@ -1,0 +1,11 @@
+import React from 'react';
+
+interface GridProps {
+  children: React.ReactNode[];
+}
+
+const Grid: React.FC<GridProps> = ({ children }) => {
+  return <div className="news-grid">{children}</div>;
+};
+
+export default Grid;
