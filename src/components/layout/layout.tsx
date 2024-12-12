@@ -6,12 +6,13 @@ import { setUser } from '../../store/slices/user';
 import MobileNavbar from './mobileNavbar';
 import Header from './header';
 import TopBanner from '../topBanner';
+import { AppState } from '../../store';
 
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector((state: any) => state.user);
+    const user = useSelector((state: AppState) => state.user);
 
     const logout = () => {
         localStorage.removeItem('token');

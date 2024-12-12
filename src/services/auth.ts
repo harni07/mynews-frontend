@@ -34,20 +34,6 @@ export const authApi = createApi({
                 body: email,
             }),
         }),
-        updateAccount: builder.mutation({
-            query: (user) => {
-                const userData: any = localStorage.getItem('token');
-                const token = JSON.parse(userData)?.access_token;
-                return {
-                    url: 'auth/user',
-                    method: 'PATCH',
-                    body: user,
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                }
-            },
-        }),
         resetPassword: builder.mutation({
             query: (body) => ({
                 url: 'auth/reset-password',
@@ -63,6 +49,5 @@ export const {
     useLoginMutation,
     useActivateAccountMutation,
     useForgotPasswordMutation,
-    useUpdateAccountMutation,
     useResetPasswordMutation
 } = authApi;

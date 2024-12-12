@@ -1,11 +1,12 @@
 import React from 'react';
 
 interface GridProps {
-  children: React.ReactNode[];
+  children: React.ReactNode;
+  className?: string;
 }
 
-const Grid: React.FC<GridProps> = ({ children }) => {
-  return <div className="news-grid">{children}</div>;
+const Grid: React.FC<GridProps> = ({ children, className }) => {
+  return <div className={`news-grid ${className || ''}`}>{children}</div>;
 };
 
 export default Grid;

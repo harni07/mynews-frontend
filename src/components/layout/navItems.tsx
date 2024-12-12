@@ -1,3 +1,4 @@
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -11,9 +12,13 @@ import {
 } from "react-icons/fa";
 import { AppState } from "../../store";
 
-const Sidebar = () => {
-  const navigate = useNavigate();
+interface NavItemsProps {
+  onItemClick?: () => void;
+}
+
+const NavItems: React.FC<NavItemsProps> = ({ onItemClick }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const user = useSelector((state: AppState) => state.user);
 
   const navItems = [
@@ -30,21 +35,22 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="sidebar">
-      <div className="nav-items">
-        {navItems.map((item, index) => (
-          <div
-            key={index}
-            className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
-            onClick={() => navigate(item.path)}
-          >
-            <div className="icon">{item.icon}</div>
-            <div className="label">{item.label}</div>
-          </div>
-        ))}
-      </div>
+    <div className="nav-items">
+      {navItems.map((item, index) => (
+        <div
+          key={index}
+          className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
+          onClick={() => {
+            navigate(item.path);
+            onItemClick && onItemClick();
+          }}
+        >
+          <div className="icon">{item.icon}</div>
+          <div className="label">{item.label}</div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default Sidebar;
+export default NavItems;

@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/slices/user";
+import { AppState } from "../../store";
 
 const AuthHeader: React.FC = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: AppState) => state.user);
 
   const handleLogout = () => {
     dispatch(logout());

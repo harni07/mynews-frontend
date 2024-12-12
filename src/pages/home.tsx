@@ -9,14 +9,9 @@ import { useGetEverythingQuery } from "../services/news";
 import LoadingSpinner from "../components/spinner";
 import { useSelector } from "react-redux";
 import { AppState } from "../store";
+import { Article } from "../models/article";
 
-export interface Article {
-  urlToImage: string;
-  title: string;
-  author: string;
-  publishedAt: string;
-  url: string;
-}
+
 
 const Home: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -40,16 +35,14 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (news?.articles) {
       const filteredArticles = news.articles.filter(
-        (article: any) => article.content !== "[Removed]" && article.description !== "[Removed]"
+        (article: Article) => article.content !== "[Removed]" && article.description !== "[Removed]"
       );
 
       setArticles((prevArticles) => {
-        // Ako je prva stranica, resetiramo sve osim breakingArticle
         if (page === 1) {
           setBreakingArticle(filteredArticles[0] || null);
           return filteredArticles.slice(1);
         }
-        // Inače dodajemo nove članke na postojeće
         return [...prevArticles, ...filteredArticles];
       });
     }
@@ -83,23 +76,25 @@ const Home: React.FC = () => {
           loader={<LoadingSpinner />}
           endMessage={<p>You have seen all the articles!</p>}
         >
-          <Grid>
-            {breakingArticle && (
-              <BreakingCard article={breakingArticle} />
-            )}
-            {articles.map((article: any, index: number) => (
-              <Card
-                key={index}
-                image={article.urlToImage || "https://via.placeholder.com/300x210"}
-                title={article.title}
-                author={article.author}
-                category="News"
-                url={article.url}
-              />
-            ))}
-          </Grid>
-        </InfiniteScroll>
-      )}
+        <Grid className={activeTab === "featured" ? "featured" : ""}>
+          {breakingArticle && (
+                  <BreakingCard article={breakingArticle} />
+                )}
+                <LatestNews />
+                {articles.map((article: Article, index: number) => (
+                  <Card
+                    key={index}
+                    image={article.urlToImage || "https://via.placeholder.com/300x210"}
+                    title={article.title || "No Title Available"}
+                    author={article.author || "Unknown Author"}
+                    category="News"
+                    url={article.url || "#"}
+                  />
+                ))}
+              </Grid>
+            </InfiniteScroll>
+          )}
+
       {activeTab === "latest" && (
         <div className="latest-wrapper">
           <LatestNews />

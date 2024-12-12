@@ -1,30 +1,83 @@
-import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { FaTimes } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
+import SearchBar from "./searchBar";
+import {
+  FaHome,
+  FaBusinessTime,
+  FaHeartbeat,
+  FaFlask,
+  FaRunning,
+  FaLaptopCode,
+  FaBookmark,
+} from "react-icons/fa";
+import { AppState } from "../../store";
 
 const MobileNavbar: React.FC = () => {
-  const user = useSelector((state: any) => state.user);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = useSelector((state: AppState) => state.user);
+
+  const navItems = [
+    { label: "Home", icon: <FaHome />, path: "/home" },
+    { label: "Business", icon: <FaBusinessTime />, path: "/category/business" },
+    { label: "Health", icon: <FaHeartbeat />, path: "/category/health" },
+    { label: "Science", icon: <FaFlask />, path: "/category/science" },
+    { label: "Sports", icon: <FaRunning />, path: "/category/sports" },
+    { label: "Technology", icon: <FaLaptopCode />, path: "/category/technology" },
+  ];
+
+  if (user?.access_token) {
+    navItems.push({ label: "Bookmarks", icon: <FaBookmark />, path: "/bookmarks" });
+  }
 
   return (
-    <Navbar expand="md" className="bg-body-tertiary d-md-none" fixed="top">
-      <Container>
-        <Navbar.Brand onClick={() => window.location.href = "/"} className="logo">
-          My<span>News</span>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/category/business">Business</Nav.Link>
-            <Nav.Link href="/category/health">Health</Nav.Link>
-            <Nav.Link href="/category/science">Science</Nav.Link>
-            <Nav.Link href="/category/sports">Sports</Nav.Link>
-            <Nav.Link href="/category/technology">Technology</Nav.Link>
-            {user?.access_token && <Nav.Link href="/bookmarks">Bookmarks</Nav.Link>}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <>
+      <div className="mobile-navbar">
+        <div className="navbar-content">
+          <div className="logo" onClick={() => navigate("/")}>
+            My<span>News</span>
+          </div>
+          <div className="hamburger" onClick={() => setMenuOpen(true)}>
+            ☰
+          </div>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <div className="hamburger-menu">
+          <div className="menu-header">
+            <div className="close-icon" onClick={() => setMenuOpen(false)}>
+              <FaTimes />
+            </div>
+          </div>
+          <div className="centered-logo">
+            <span className="logo-black">My</span>
+            <span className="logo-red">News</span>
+          </div>
+
+          <SearchBar onSearchComplete={() => setMenuOpen(false)} />
+
+          <div className="nav-items">
+            {navItems.map((item, index) => (
+              <div
+                key={index}
+                className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
+                onClick={() => {
+                  navigate(item.path);
+                  setMenuOpen(false);
+                }}
+              >
+                <div className="icon">{item.icon}</div>
+                <div className="label">{item.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

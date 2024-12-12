@@ -3,16 +3,31 @@ import { FaSearch } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setSearchQuery } from "../../store/slices/searchSlice";
 
-const SearchBar: React.FC = () => {
+interface SearchBarProps {
+  onSearchComplete?: () => void; 
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearchComplete }) => {
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
+
+  const isMobile = window.innerWidth <= 768;
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
   };
 
   const handleSearch = () => {
-    dispatch(setSearchQuery(searchInput));
+    if (searchInput.trim()) {
+      dispatch(setSearchQuery(searchInput));
+      onSearchComplete && onSearchComplete();
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isMobile && event.key === "Enter") {
+      handleSearch(); 
+    }
   };
 
   return (
@@ -25,10 +40,13 @@ const SearchBar: React.FC = () => {
           className="search-input"
           value={searchInput}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown} 
         />
-        <button className="search-button" onClick={handleSearch}>
-          Search
-        </button>
+        {!isMobile && (
+          <button className="search-button" onClick={handleSearch}>
+            Search
+          </button>
+        )}
       </div>
     </div>
   );

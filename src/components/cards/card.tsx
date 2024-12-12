@@ -6,6 +6,7 @@ import {
   useAddBookmarkMutation,
   useRemoveBookmarkMutation,
 } from "../../services/bookmark";
+import { AppState } from "../../store";
 
 interface CardProps {
   image: string;
@@ -16,7 +17,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ image, title, author, category, url }) => {
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: AppState) => state.user);
   const { data: bookmarks = [], refetch } = useGetBookmarksQuery("");
   const [addBookmark] = useAddBookmarkMutation();
   const [removeBookmark] = useRemoveBookmarkMutation();

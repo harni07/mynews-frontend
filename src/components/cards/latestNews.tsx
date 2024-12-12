@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useGetLatestNewsQuery } from "../../services/news";
-import { Article } from "../../pages/home";
+import { Article } from "../../models/article";
 
 interface LatestNewsProps {
   className?: string; 
@@ -20,7 +20,6 @@ const LatestNews: React.FC<LatestNewsProps> = ({ className }) => {
   }, [data]);
 
   const fetchMoreData = () => {
-    console.log("Fetching more data for Latest News");
     setPage((prev) => prev + 1);
   };
 
@@ -38,20 +37,28 @@ const LatestNews: React.FC<LatestNewsProps> = ({ className }) => {
         scrollableTarget="latest-news-container"
         loader=""
       >
-        <div className="news-list" id="latest-news-container">
-          {articles.map((article, index) => (
+         <div className="news-list" id="latest-news-container">
+          {articles.map((article: Article, index: number) => (
             <div
               key={index}
               className="news-item"
-              onClick={() => window.open(article.url, "_blank")}
+              onClick={() =>
+                article.url
+                  ? window.open(article.url, "_blank")
+                  : alert("URL not available")
+              }
             >
               <div className="news-time">
-                {new Date(article.publishedAt).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {article.publishedAt
+                  ? new Date(article.publishedAt).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  : "No time available"}
               </div>
-              <div className="news-title">{article.title}</div>
+              <div className="news-title">
+                {article.title || "No title available"}
+              </div>
               <hr />
             </div>
           ))}

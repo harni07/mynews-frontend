@@ -6,13 +6,9 @@ import Grid from "../components/grid";
 import Card from "../components/cards/card";
 import { useGetEverythingQuery } from "../services/news";
 import LoadingSpinner from "../components/spinner";
+import { Article } from "../models/article";
 
-export interface Article {
-  urlToImage: string;
-  title: string;
-  author: string;
-  publishedAt: string;
-}
+
 
 const Category: React.FC = () => {
   const { category } = useParams<{ category: string }>();
@@ -31,9 +27,8 @@ const Category: React.FC = () => {
 
   useEffect(() => {
     if (news?.articles) {
-      // Filtriraj artikle
       const filteredArticles = news.articles.filter(
-        (article: any) => article.content !== "[Removed]" && article.description !== "[Removed]"
+        (article: Article) => article.content !== "[Removed]" && article.description !== "[Removed]"
       );
 
       setArticles((prevArticles) =>
@@ -59,20 +54,20 @@ const Category: React.FC = () => {
         next={fetchMoreData}
         hasMore={!isLoading && news?.articles?.length > 0}
         loader={<LoadingSpinner />}
-        endMessage={<p>You have seen all the articles!</p>}
       >
         <Grid>
-          {articles.map((article: any, index: number) => (
+          {articles.map((article: Article, index: number) => (
             <Card
               key={index}
-              image={article.urlToImage || "https://via.placeholder.com/300x210"}
-              title={article.title}
-              author={article.author}
-              url={article.url}
-              category={capitalizeFirstLetter(category) || "News"}
+              image={article.urlToImage || "https://via.placeholder.com/300x210"} 
+              title={article.title || "No Title Available"} 
+              author={article.author || "Unknown Author"} 
+              url={article.url || "#"} 
+              category={capitalizeFirstLetter(category) || "News"} 
             />
           ))}
         </Grid>
+
       </InfiniteScroll>
     </Layout>
   );
