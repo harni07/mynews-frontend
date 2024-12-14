@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import  { useState } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import '../../styles/components/login.scss';
 import * as yup from 'yup';
@@ -6,7 +7,12 @@ import { Formik, Form } from 'formik';
 import { FloatingLabel, Form as BSForm } from 'react-bootstrap';
 import {useResetPasswordMutation} from "../../services/auth";
 import LoadingButton from "../../components/buttons/loadingbuttuon";
-import AuthContainer from "../../components/authContainer";
+
+interface FormValues {
+    password: string;
+    repeatPassword: string;
+}
+
 
 const ResetPassword = () => {
     const navigate = useNavigate();
@@ -19,25 +25,25 @@ const ResetPassword = () => {
         repeatPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('Repeat password is required')
     });
 
-    const handleSubmit = async (values: any, callback: () => void) => {
-
+    const handleSubmit = async (values: FormValues, callback: () => void) => {
         const body = {
             newPassword: values.password,
             token: token
-        }
+        };
         try {
-            const data: any = await resetPassword(body);
-            if (data.error.data.message) {
-                setErrorMsg(data.error.data.message);
+            const response = await resetPassword(body).unwrap();
+            if (response.error) {
+                setErrorMsg(response.error.message);
             }
-        } catch (error2) {
-            console.error(error, 'error');
+        } catch (error) {
+            console.error(error, 'Error during password reset');
         }
         callback();
     };
+    
 
     return (
-        <AuthContainer>
+        <>
             {data && (
                 <>
                     <h3 className='text-white'>{data.message}</h3>
@@ -52,7 +58,7 @@ const ResetPassword = () => {
                     <Formik
                         initialValues={{ password: '', repeatPassword: '' }}
                         validationSchema={validationSchema}
-                        onSubmit={(values: any) => {
+                        onSubmit={(values: FormValues) => {
                             handleSubmit(values, callback);
                         }}
                     >
@@ -109,7 +115,7 @@ const ResetPassword = () => {
                     </Formik>
                 </>
             )}
-        </AuthContainer>
+        </>
     );
 };
 

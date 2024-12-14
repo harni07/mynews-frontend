@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Sidebar from './SideBar';
 import { setUser } from '../../store/slices/user';
@@ -8,18 +8,9 @@ import Header from './header';
 import TopBanner from '../topBanner';
 import { AppState } from '../../store';
 
-
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const user = useSelector((state: AppState) => state.user);
-
-    const logout = () => {
-        localStorage.removeItem('token');
-        navigate("/login")
-    }
-
-  
 
     useEffect(() => {
         const storedUserData = localStorage.getItem('token');
@@ -29,21 +20,21 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }
     }, [dispatch]);
 
-  
-
     return (
         <>
             <TopBanner />
-           <MobileNavbar />
-           <div className="layout-container">
-              <Header />
-              <div className="content">
-                  <Sidebar />
-                  <div className="main-content">{children}</div>
-              </div>
+            <MobileNavbar />
+            <div className="layout-container">
+                <Header />
+                <div className="content">
+                    <Sidebar />
+                    <div className="main-content">
+                        <Outlet /> 
+                    </div>
+                </div>
             </div>
         </>
-      );
+    );
 }
 
 export default Layout;

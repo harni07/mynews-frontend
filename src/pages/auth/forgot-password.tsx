@@ -5,8 +5,11 @@ import * as yup from 'yup';
 import { Formik, Form } from 'formik';
 import { FloatingLabel, Form as BSForm } from 'react-bootstrap';
 import LoadingButton from "../../components/buttons/loadingbuttuon";
-import AuthContainer from "../../components/authContainer";
 import {useNavigate} from "react-router-dom";
+
+interface ForgotPasswordFormValues {
+    email: string;
+}
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -16,18 +19,19 @@ const ForgotPassword = () => {
         email: yup.string().email('Invalid email format').required('Email is required')
     });
 
-    const handleSubmit = async (values: any, callback: () => void) => {
+    const handleSubmit = async (values: ForgotPasswordFormValues, callback: () => void) => {
         try {
-            await sendEmail({email: values.email});
+            await sendEmail({ email: values.email }).unwrap();
         } catch (error) {
-            console.error(error);
+            console.error("Error sending forgot password email:", error);
         } finally {
             callback();
         }
     };
+    
 
     return (
-        <AuthContainer>
+        <>
     {data && <h2 className='text-white'>{data.message}</h2>}
     {!data && (
         <>
@@ -36,7 +40,7 @@ const ForgotPassword = () => {
             <Formik
                 initialValues={{ email: '' }}
                 validationSchema={validationSchema}
-                onSubmit={(values: any) => {
+                onSubmit={(values) => {
                     handleSubmit(values, callback);
                 }}
             >
@@ -82,7 +86,7 @@ const ForgotPassword = () => {
             </Formik>
         </>
     )}
-</AuthContainer>
+</>
     );
 };
 

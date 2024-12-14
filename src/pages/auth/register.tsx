@@ -5,8 +5,15 @@ import * as yup from 'yup';
 import LoadingButton from "../../components/buttons/loadingbuttuon";
 import { FloatingLabel, Form as BSForm } from 'react-bootstrap';
 import { Formik, Form } from 'formik';
-import AuthContainer from "../../components/authContainer";
 import {useNavigate} from "react-router-dom";
+
+interface RegisterFormValues {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+}
+
 
 const Register = () => {
     const navigate = useNavigate();
@@ -21,20 +28,20 @@ const Register = () => {
         password: yup.string().required('Password is required')
     });
 
-    const handleSubmit = async (values: any, callback: () => void) => {
+    const handleSubmit = async (values: RegisterFormValues, callback: () => void) => {
         try {
-            const response: any = await registerUser(values);
-            if (response.error && response.error.status === 400) {
-                setErrorMsg(response.error.data.message || "An error occurred.");
+            const result = await registerUser(values).unwrap();
+            if (result.error && result.error.status === 400) {
+                setErrorMsg(result.error.data.message || "An error occurred.");
             }
-        } catch (error: any) {
+        } catch (error: any	) {
             setErrorMsg(error.message || "An unexpected error occurred.");
         }
         callback();
     };
 
     return (
-        <AuthContainer>
+        <>
             <Formik
                 initialValues={{
                     first_name: '',
@@ -43,7 +50,7 @@ const Register = () => {
                     password: ''
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values: any) => {
+                onSubmit={(values: RegisterFormValues) => {
                     handleSubmit(values, callback);
                 }}
             >
@@ -127,7 +134,7 @@ const Register = () => {
                     </Form>
                 )}
             </Formik>
-        </AuthContainer>
+        </>
     );
 };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import {useActivateAccountMutation} from "../../services/auth";
 import {useParams} from "react-router-dom";
-import AuthContainer from "../../components/authContainer";
 
 const AccountActivated = () =>  {
 
@@ -13,7 +12,7 @@ const AccountActivated = () =>  {
     }
 
     return (
-        <AuthContainer>
+        <>
             {!data && <h2>Potvrdite svoj račun</h2>}
             {!data && (
                 <button onClick={() => activate()} className="activate-button">Aktiviraj račun</button>
@@ -24,7 +23,7 @@ const AccountActivated = () =>  {
                 <a href='/login'>Prijava</a>
             </div>
 
-        </AuthContainer>
+        </>
     );
 
 };

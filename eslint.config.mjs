@@ -1,9 +1,12 @@
 import tsParser from "@typescript-eslint/parser";
 import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
+import globals from "globals";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
+  pluginJs.configs.recommended,
+  pluginReact.configs.flat.recommended,
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     languageOptions: {
@@ -15,13 +18,19 @@ export default [
           jsx: true,
         },
       },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      }
     },
     settings: {
       react: {
-        version: "detect", 
+        version: "detect",
       },
     },
+    rules: {
+      "no-unused-vars": "off",
+      "react/no-unescaped-entities": "off",
+    },
   },
-  pluginJs.configs.recommended, 
-  pluginReact.configs.flat.recommended, 
 ];

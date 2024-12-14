@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import {useEffect, useState} from 'react';
 import {useLoginMutation} from "../../services/auth";
 import {useNavigate} from "react-router-dom";
 import '../../styles/components/login.scss';
@@ -6,9 +7,13 @@ import * as yup from 'yup';
 import { Formik, Form } from 'formik';
 import { FloatingLabel, Form as BSForm } from 'react-bootstrap';
 import LoadingButton from "../../components/buttons/loadingbuttuon";
-import AuthContainer from "../../components/authContainer";
 import {setUser} from "../../store/slices/user";
 import {useDispatch} from "react-redux";
+
+interface LoginFormValues {
+    email: string;
+    password: string;
+}
 
 const Login = () => {
     const [callback, setCallback] = useState(() => () => {});
@@ -22,38 +27,40 @@ const Login = () => {
         password: yup.string().required('Password is required')
     });
 
-    const handleSubmit = async (values: any, callback: () => void) => {
-
+    const handleSubmit = async (values: LoginFormValues, callback: () => void) => {
         try {
-            const response: any = await loginUser({ email: values.email, password: values.password });
-            if (response.error) {
-                setErrorMsg(response.error.data.message);
-            }
+            const response = await loginUser({ email: values.email, password: values.password }).unwrap();
+            dispatch(setUser(response));
+            navigate("/home");
         } catch (error: any) {
             setErrorMsg(error.data.message);
         }
         callback();
     };
+    
 
     useEffect(() => {
-        const registerState: any = localStorage.getItem('token');
-        const access_token = registerState ? JSON.parse(registerState).access_token : null;
-        if (access_token) {
-            navigate("/home")
+        const registerState = localStorage.getItem('token');
+        const tokenData = registerState ? JSON.parse(registerState) : null;
+    
+        if (tokenData?.access_token) {
+            navigate("/home");
         }
+    
         if (data?.access_token) {
             localStorage.setItem('token', JSON.stringify(data));
             dispatch(setUser(data));
-            navigate("/home")
+            navigate("/home");
         }
-    });
+    }, [navigate, data, dispatch]);
+    
 
     return (
-        <AuthContainer>
+        <>
             <Formik
                 initialValues={{ email: '', password: '' }}
                 validationSchema={validationSchema}
-                onSubmit={(values: any) => {
+                onSubmit={(values: LoginFormValues) => {
                     handleSubmit(values, callback);
                 }}
             >
@@ -115,7 +122,7 @@ const Login = () => {
                     </Form>
                 )}
             </Formik>
-        </AuthContainer>
+        </>
     );
 };
 

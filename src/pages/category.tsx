@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Layout from "../components/layout/layout";
 import Grid from "../components/grid";
 import Card from "../components/cards/card";
 import { useGetEverythingQuery } from "../services/news";
@@ -41,14 +40,8 @@ const Category: React.FC = () => {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const capitalizeFirstLetter = (str: string | undefined) => {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
-
   return (
-    <Layout>
-      <h2 className="category-title">{capitalizeFirstLetter(category)} News</h2>
+    <>
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
@@ -56,20 +49,21 @@ const Category: React.FC = () => {
         loader={<LoadingSpinner />}
       >
         <Grid>
-          {articles.map((article: Article, index: number) => (
+        {articles.map((article: Article, index: number) => (
             <Card
               key={index}
-              image={article.urlToImage || "https://via.placeholder.com/300x210"} 
-              title={article.title || "No Title Available"} 
-              author={article.author || "Unknown Author"} 
-              url={article.url || "#"} 
-              category={capitalizeFirstLetter(category) || "News"} 
+              image={article.urlToImage}
+              title={article.title}
+              author={article.author}
+              url={article.url}
+              category={article.category}
             />
-          ))}
+        ))}
+
         </Grid>
 
       </InfiniteScroll>
-    </Layout>
+    </>
   );
 };
 

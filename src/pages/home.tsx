@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Layout from "../components/layout/layout";
 import Grid from "../components/grid";
 import Card from "../components/cards/card";
 import BreakingCard from "../components/cards/breakingCard";
@@ -53,7 +52,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className="mobile-tabs hide-desktop">
         <button
           className={`tab ${activeTab === "featured" ? "active" : ""}`}
@@ -82,15 +81,15 @@ const Home: React.FC = () => {
                 )}
                 <LatestNews />
                 {articles.map((article: Article, index: number) => (
-                  <Card
-                    key={index}
-                    image={article.urlToImage || "https://via.placeholder.com/300x210"}
-                    title={article.title || "No Title Available"}
-                    author={article.author || "Unknown Author"}
-                    category="News"
-                    url={article.url || "#"}
-                  />
-                ))}
+                    <Card
+                      key={index}
+                      image={article.urlToImage}
+                      title={article.title}
+                      author={article.author}
+                      category="News"
+                      url={article.url}
+                    />
+                  ))}
               </Grid>
             </InfiniteScroll>
           )}
@@ -100,7 +99,7 @@ const Home: React.FC = () => {
           <LatestNews />
         </div>
       )}
-    </Layout>
+    </>
   );
 };
 
