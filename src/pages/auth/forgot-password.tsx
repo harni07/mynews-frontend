@@ -35,8 +35,8 @@ const ForgotPassword = () => {
     {data && <h2 className='text-white'>{data.message}</h2>}
     {!data && (
         <>
-            <h2 className='mb-2'>Zaboravljena lozinka</h2>
-            <p className='text-white'>Unesite svoju e-mail adresu kako biste resetirali lozinku</p>
+            <h2 className='mb-2'>Forgot Password</h2>
+            <p className='text-white'>Enter your email address to reset your password</p>
             <Formik
                 initialValues={{ email: '' }}
                 validationSchema={validationSchema}
@@ -53,7 +53,7 @@ const ForgotPassword = () => {
                     validateForm
                 }) => (
                     <Form>
-                        <FloatingLabel controlId="email" label="E-mail adresa" className="mb-3">
+                        <FloatingLabel controlId="email" label="E-mail" className="mb-3">
                             <BSForm.Control
                                 type="text"
                                 value={values.email}
@@ -64,12 +64,12 @@ const ForgotPassword = () => {
                                 {errors.email}
                             </BSForm.Control.Feedback>
                         </FloatingLabel>
-                        {isError && <p className='text-danger'>Korisnik s ovom e-mail adresom ne postoji</p>}
+                        {isError && <p className='text-danger'>User with this email address does not exist</p>}
                         <div className="links">
-                            <a onClick={()=> navigate("/login")}>Prijava</a>
-                            <a onClick={()=> navigate("/register")}>Registracija</a>
+                            <a onClick={()=> navigate("/login")}>Login</a>
+                            <a onClick={()=> navigate("/register")}>Register</a>
                         </div>
-                        <LoadingButton variant="primary" type="submit" size="lg" text="Resetiranje lozinke" onClickCallback={(submitCallback) => {
+                        <LoadingButton variant="primary" type="submit" size="lg" text="Reset password" onClickCallback={(submitCallback) => {
                             validateForm().then((v: any) => {
                                 for (let value in values) {
                                     if (v[value] !== undefined) {

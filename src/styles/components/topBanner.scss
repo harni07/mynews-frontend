@@ -17,13 +17,19 @@
       flex-direction: row;
       gap: 15px;
 
+      strong,
+      span {
+        font-family: 'Inter';
+      }
+
       strong {
         font-size: 16px;
-        font-weight: bold;
+        font-weight: 700;
       }
 
       span {
         font-size: 14px;
+        font-weight: 400;
       }
     }
 
@@ -31,15 +37,20 @@
       display: flex;
       gap: 10px;
 
-      .dismiss-btn {
-        background: none;
-        border: none;
-        color: #fff;
+      .dismiss-btn,
+      .get-btn {
+        font-family: 'Inter';
+        font-weight: 700;
         font-size: 14px;
-        font-weight: bold;
+        border: none;
         cursor: pointer;
         padding: 5px 10px;
         border-radius: 5px;
+      }
+
+      .dismiss-btn {
+        background: none;
+        color: #fff;
 
         &:hover {
           opacity: 0.8;
@@ -49,12 +60,7 @@
       .get-btn {
         background-color: #fff;
         color: #000;
-        border: none;
-        font-size: 14px;
-        font-weight: bold;
         padding: 8px 15px;
-        cursor: pointer;
-        border-radius: 5px;
 
         &:hover {
           opacity: 0.9;
@@ -67,12 +73,12 @@
     .top-banner-content {
       margin-top: 60px;
       width: 90%;
-      flex-direction: column; // Prelazak na vertikalni layout na manjim uređajima
+      flex-direction: column;
       gap: 10px;
 
       .banner-text {
         flex-direction: column;
-        text-align: center; // Centriran tekst
+        text-align: center;
         gap: 5px;
 
         strong {
@@ -85,9 +91,8 @@
       }
 
       .banner-actions {
-        justify-content: center; // Centriranje gumba
+        justify-content: center;
         flex-direction: row;
-        gap: 10px;
 
         .dismiss-btn,
         .get-btn {

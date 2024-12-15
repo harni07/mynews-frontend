@@ -26,12 +26,14 @@ const Login = () => {
         email: yup.string().required('Email is required'),
         password: yup.string().required('Password is required')
     });
-
+    
     const handleSubmit = async (values: LoginFormValues, callback: () => void) => {
+
         try {
-            const response = await loginUser({ email: values.email, password: values.password }).unwrap();
-            dispatch(setUser(response));
-            navigate("/home");
+            const response: any = await loginUser({ email: values.email, password: values.password });
+            if (response.error) {
+                setErrorMsg(response.error.data.message);
+            }
         } catch (error: any) {
             setErrorMsg(error.data.message);
         }
@@ -73,7 +75,7 @@ const Login = () => {
                       validateForm
                   }) => (
                     <Form>
-                        <h2 className='mb-3'>Prijava</h2>
+                        <h2 className='mb-3'>Login</h2>
 
                         <FloatingLabel controlId="email" label="Email" className="mb-3">
                             <BSForm.Control
@@ -87,7 +89,7 @@ const Login = () => {
                             </BSForm.Control.Feedback>
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="password" label="Lozinka" className="mb-3">
+                        <FloatingLabel controlId="password" label="Password" className="mb-3">
                             <BSForm.Control
                                 type="password"
                                 value={values.password}
@@ -104,10 +106,10 @@ const Login = () => {
 
                         <div className="links">
 
-                            <a className='cursor-pointer' onClick={()=> navigate("/forgot-password")}>Zaboravljena lozinka?</a>
-                            <a onClick={()=> navigate("/register")}>Registracija</a>
+                            <a className='cursor-pointer' onClick={()=> navigate("/forgot-password")}>Forgot password?</a>
+                            <a onClick={()=> navigate("/register")}>Register</a>
                         </div>
-                        <LoadingButton variant="primary" type="submit" size="lg" text="Prijavi se" onClickCallback={(submitCallback) => {
+                        <LoadingButton variant="primary" type="submit" size="lg" text="Login" onClickCallback={(submitCallback) => {
                             validateForm().then((v: any) => {
                                 for (let value in values) {
                                     if (v[value] !== undefined) {

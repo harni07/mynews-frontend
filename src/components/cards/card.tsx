@@ -15,8 +15,8 @@ interface CardProps {
   author?: string | null;
   category?: string | null;
   url?: string | null;
+  showAdLabel?: boolean;
 }
-
 
 const Card: React.FC<CardProps> = ({
   image = "https://via.placeholder.com/300x210",
@@ -24,6 +24,7 @@ const Card: React.FC<CardProps> = ({
   author = "Unknown Author",
   category = "News",
   url = "#",
+  showAdLabel = false,
 }) => {
   const user = useSelector((state: AppState) => state.user);
   const { data: bookmarks = [], refetch } = useGetBookmarksQuery("");
@@ -37,7 +38,6 @@ const Card: React.FC<CardProps> = ({
       window.open(url, "_blank", "noopener,noreferrer");
     }
   };
-  
 
   const handleBookmarkClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -63,6 +63,8 @@ const Card: React.FC<CardProps> = ({
         className="card-image"
         style={{ backgroundImage: `url(${image})` }}
       ></div>
+
+      {showAdLabel && <div className="ad-label">AD</div>}
 
       {user?.access_token && (
         <div

@@ -11,17 +11,17 @@ import { AppState } from "../store";
 import { Article } from "../models/article";
 
 
-
 const Home: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [page, setPage] = useState(1);
   const [activeTab, setActiveTab] = useState<"featured" | "latest">("featured");
   const [breakingArticle, setBreakingArticle] = useState<Article | null>(null);
+  const categories = ["TECH", "SPORTS", "HEALTH", "NEWS", "VIRAL"];
 
   const searchQuery = useSelector((state: AppState) => state.search.query);
 
   const { data: news, isLoading } = useGetEverythingQuery({
-    keyword: searchQuery || "technology",
+    keyword: searchQuery || "news",
     page,
   });
 
@@ -80,16 +80,23 @@ const Home: React.FC = () => {
                   <BreakingCard article={breakingArticle} />
                 )}
                 <LatestNews />
-                {articles.map((article: Article, index: number) => (
+                {articles.map((article: Article, index: number) => {
+                  const randomCategory =
+                    categories[Math.floor(Math.random() * categories.length)];
+                  const showAdLabel = (index + 1) % 6 === 0;
+
+                  return (
                     <Card
                       key={index}
                       image={article.urlToImage}
                       title={article.title}
                       author={article.author}
-                      category="News"
+                      category={randomCategory}
                       url={article.url}
+                      showAdLabel={showAdLabel} 
                     />
-                  ))}
+                  );
+                })}
               </Grid>
             </InfiniteScroll>
           )}

@@ -42,15 +42,16 @@
       .news-time {
         font-size: 10px;
         line-height: 16px;
-        color: #1e71bb;
+        color: #1E71BB;
         margin-bottom: 4px;
+        font-weight: 700;
       }
 
       .news-title {
         font-size: 16px;
         line-height: 20px;
-        margin-bottom: 8px;
-        font-weight: 400;
+        margin-bottom: 15px;
+        font-weight: 500;
       }
 
       hr {
@@ -68,7 +69,8 @@
     span {
       font-size: 12px;
       line-height: 14px;
-      color: #007bff;
+      font-weight: 500;
+      color: #1E71BB;
       cursor: pointer;
       display: flex;
       justify-content: start;
@@ -114,7 +116,7 @@
     line-height: 20px;
     margin-left: 15px;
     color: #000;
-    font-weight: bold;
+    font-weight: 500;
   }
 }
 

@@ -49,16 +49,21 @@ const Category: React.FC = () => {
         loader={<LoadingSpinner />}
       >
         <Grid>
-        {articles.map((article: Article, index: number) => (
+        {articles.map((article: Article, index: number) => {
+          const showAdLabel = (index + 1) % 6 === 0;
+
+          return (
             <Card
               key={index}
               image={article.urlToImage}
               title={article.title}
               author={article.author}
               url={article.url}
-              category={article.category}
+              category={category}
+              showAdLabel={showAdLabel}
             />
-        ))}
+          );
+        })}
 
         </Grid>
 

@@ -15,33 +15,33 @@
   
       &.login {
         background-color: transparent;
-        color: #ff6347;
-        border: 1px solid #ff6347;
+        color: $red-main;
+        border: 1px solid $red-main;
   
         &:hover {
-          background-color: #ff6347;
+          background-color: $red-main;
           color: #fff;
         }
       }
   
       &.signup {
-        background-color: #ff6347;
+        background-color: $red-main;
         color: #fff;
   
         &:hover {
-          background-color: #e55347;
+          background-color: $red-main;
           box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
         }
       }
   
       &.logout {
         background-color: transparent;
-        color: #e55347;
-        border: 1px solid #e55347;
+        color: $red-main;
+        border: 1px solid $red-main;
   
         &:hover {
-          background-color: #ff6347;
-          border-color: #ff6347;
+          background-color: $red-main;
+          border-color: $red-main;
           color: #fff;
         }
       }

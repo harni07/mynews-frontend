@@ -71,15 +71,15 @@
     letter-spacing: -0.02px;
     padding: 8px 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     background-color: transparent;
-    color: #333;
+    color: #1D1D1B;
     transition: background-color 0.3s;
 
     &.active {
       background-color: #bb1e1e1a;
-      color: #bb1e1e;
+      color: $red-main;
     }
 
     &:hover {

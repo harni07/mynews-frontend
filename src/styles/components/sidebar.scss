@@ -29,6 +29,8 @@
         text-align: center;
         margin-top: 5px;
         transition: color 0.3s;
+        font-family: 'Inter';
+        font-weight: 600;
       }
 
       &:hover {
@@ -36,7 +38,7 @@
 
         .icon,
         .label {
-          color: red;
+          color: $red-main;
         }
       }
 
@@ -45,7 +47,7 @@
 
         .icon,
         .label {
-          color: red;
+          color: $red-main;
         }
       }
     }

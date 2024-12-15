@@ -1,5 +1,5 @@
 .logo {
-  color: red;
+  color: $red-main;
 
   span {
       color: black;
@@ -41,7 +41,7 @@
         }
 
         .red {
-          color: red;
+          color: $red-main;
         }
 
         .black {

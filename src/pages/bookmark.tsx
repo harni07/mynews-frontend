@@ -5,7 +5,7 @@ import { useGetBookmarksQuery } from "../services/bookmark";
 import { Article } from "../models/article";
 
 const BookmarksPage: React.FC = () => {
-  const { data: bookmarks = [], isLoading } = useGetBookmarksQuery("");
+  const { data: bookmarks = []} = useGetBookmarksQuery("");
 
   return (
     <>

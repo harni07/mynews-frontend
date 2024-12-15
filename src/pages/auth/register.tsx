@@ -30,11 +30,11 @@ const Register = () => {
 
     const handleSubmit = async (values: RegisterFormValues, callback: () => void) => {
         try {
-            const result = await registerUser(values).unwrap();
-            if (result.error && result.error.status === 400) {
-                setErrorMsg(result.error.data.message || "An error occurred.");
+            const response: any = await registerUser(values);
+            if (response.error && response.error.status === 400) {
+                setErrorMsg(response.error.data.message || "An error occurred.");
             }
-        } catch (error: any	) {
+        } catch (error: any) {
             setErrorMsg(error.message || "An unexpected error occurred.");
         }
         callback();
@@ -63,9 +63,9 @@ const Register = () => {
                       validateForm
                   }) => (
                     <Form>
-                        <h2>Registracija</h2>
+                        <h2>Register</h2>
 
-                        <FloatingLabel controlId="first_name" label="Ime" className="mb-3">
+                        <FloatingLabel controlId="first_name" label="First Name" className="mb-3">
                             <BSForm.Control
                                 type="text"
                                 value={values.first_name}
@@ -77,7 +77,7 @@ const Register = () => {
                             </BSForm.Control.Feedback>
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="last_name" label="Prezime" className="mb-3">
+                        <FloatingLabel controlId="last_name" label="Last Name" className="mb-3">
                             <BSForm.Control
                                 type="text"
                                 value={values.last_name}
@@ -101,7 +101,7 @@ const Register = () => {
                             </BSForm.Control.Feedback>
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="password" label="Lozinka" className="mb-3">
+                        <FloatingLabel controlId="password" label="Password" className="mb-3">
                             <BSForm.Control
                                 type="password"
                                 value={values.password}
@@ -117,9 +117,9 @@ const Register = () => {
                         {response && <p className='text-white mt-3'>{response.message}</p>}
 
                         <div className="links">
-                            <a onClick={()=> navigate("/login")}>Prijava</a>
+                            <a onClick={()=> navigate("/login")}>Login</a>
                         </div>
-                        <LoadingButton variant="primary" type="submit" size="lg" text="Registrijaj se" onClickCallback={(submitCallback) => {
+                        <LoadingButton variant="primary" type="submit" size="lg" text="Register" onClickCallback={(submitCallback) => {
                             validateForm().then((v: any) => {
                                 for (let value in values) {
                                     if (v[value] !== undefined) {

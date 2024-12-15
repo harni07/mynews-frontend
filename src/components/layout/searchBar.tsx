@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearchComplete }) => {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isMobile && event.key === "Enter") {
+    if (event.key === "Enter") {
       handleSearch(); 
     }
   };

@@ -13,14 +13,14 @@ const AccountActivated = () =>  {
 
     return (
         <>
-            {!data && <h2>Potvrdite svoj račun</h2>}
+            {!data && <h2>Activate your account</h2>}
             {!data && (
-                <button onClick={() => activate()} className="activate-button">Aktiviraj račun</button>
+                <button onClick={() => activate()} className="btn-primary p-2">Activate</button>
             )}
-            {data && <h2>Račun aktiviran. Možete se prijaviti</h2>}
+            {data && <h2>Account activated. You can login into your account</h2>}
 
             <div className="links">
-                <a href='/login'>Prijava</a>
+                <a href='/login'>Login</a>
             </div>
 
         </>

@@ -1,5 +1,5 @@
 @import './bootstrap/imports';
-@import './utils';
+@import './variables';
 @import './components/layout';
 @import './components/sidebar';
 @import './components/grid';
@@ -14,20 +14,60 @@
 @import './components/loader';
 
 
-@import './components/button';
-@import './components/pagination';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500&display=swap');
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Light.woff2') format('woff2');
+  font-weight: 300; 
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
 
 
-$yellow-main: #BB1E1E;
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Black.woff2') format('woff2');
+  font-weight: 900; 
+  font-style: normal;
+  font-display: swap;
+}
 
-html * {
-  font-family: 'Roboto', sans-serif;
+html, body {
+  font-family: 'Inter', sans-serif;
 }
 
 .btn-primary {
-  background-color: $yellow-main !important;
+  background-color: $red-main !important;
   border: none !important;
 }
 
